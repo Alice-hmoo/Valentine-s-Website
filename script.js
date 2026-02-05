@@ -1,53 +1,39 @@
-// Background music autoplay for all pages
 window.addEventListener("load", function() {
+    // Play background music on any page
     const music = document.getElementById("bgMusic");
-    if(music) {
-        music.play().catch(e=>console.log("Autoplay blocked, user interaction needed."));
+    if(music){
         music.loop = true;
+        music.play().catch(e=>console.log("Autoplay blocked. User interaction may be needed."));
     }
 
-    // Only run fireworks on page 3
-    if(document.getElementById("canvas")) {
-        fireworksAuto();
+    // Fireworks on page3 only
+    const canvas = document.getElementById("fireworks-canvas");
+    const sound = document.getElementById("fireworksSound");
+    if(canvas && sound){
+        sound.play().catch(e=>console.log("Autoplay blocked. User interaction may be needed."));
+        startFireworks(canvas);
     }
 });
 
-// Fireworks code (page3 only)
-function fireworksAuto() {
-    const canvas = document.getElementById("canvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let particles = [];
-
-    function addParticles() {
-        for (let i = 0; i < 80; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: Math.random() * 6 - 3,
-                vy: Math.random() * 6 - 3,
-                alpha: 1
-            });
-        }
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach((p, i) => {
-            p.x += p.vx;
-            p.y += p.vy;
-            p.alpha -= 0.015;
-            ctx.fillStyle = `rgba(255,20,147,${p.alpha})`;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, 3, 0, Math.PI*2);
-            ctx.fill();
-            if(p.alpha <= 0) particles.splice(i,1);
-        });
-        requestAnimationFrame(animate);
-    }
-
-    setInterval(addParticles, 500); // Keep adding particles
-    animate();
+function startFireworks(container){
+    const fireworks = new Fireworks(container, {
+        speed: 3,
+        acceleration: 1.05,
+        friction: 0.95,
+        gravity: 1.5,
+        particles: 80,
+        trace: 3,
+        explosion: 5,
+        autoresize: true,
+        opacity: 0.8,
+        lineWidth: 3,
+        brightness: { min: 50, max: 80 },
+        decay: { min: 0.015, max: 0.03 },
+        delay: { min: 10, max: 30 },
+        hue: { min: 0, max: 360 },
+        rocketsPoint: { min: 50, max: 90 },
+        shapes: ['circle','star','heart','ring','willow','brocade','peony','bees','pearls','strobe'],
+        sound: false
+    });
+    fireworks.start();
 }
