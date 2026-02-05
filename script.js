@@ -1,24 +1,35 @@
-window.addEventListener("load", function() {
-    // Play background music on any page
+let unlocked = false;
+
+function unlockEverything() {
+    if (unlocked) return;
+    unlocked = true;
+
+    /* ===============================
+       Page 1 & Page 2 – Background music
+       =============================== */
     const music = document.getElementById("bgMusic");
-    if(music){
+    if (music) {
         music.loop = true;
-        music.play().catch(e=>console.log("Autoplay blocked. User interaction may be needed."));
+        music.volume = 0.7;
+        music.play().catch(() => {
+            console.log("Background music blocked");
+        });
     }
 
-   // Fireworks ONLY on page 3
+    /* ===============================
+       Page 3 – Fireworks + sound
+       =============================== */
     const fireworksContainer = document.getElementById("fireworks");
     const sound = document.getElementById("fireworksSound");
 
     if (fireworksContainer && sound) {
 
-        // Play fireworks sound (loop)
         sound.loop = true;
+        sound.volume = 0.8;
         sound.play().catch(() => {
-            console.log("Fireworks sound blocked until user interaction");
+            console.log("Fireworks sound blocked");
         });
 
-        // Start fireworks visuals
         const fireworks = new Fireworks(fireworksContainer, {
             speed: 3,
             acceleration: 1.05,
@@ -37,16 +48,16 @@ window.addEventListener("load", function() {
             rocketsPoint: { min: 40, max: 90 },
 
             shapes: [
-                'circle',
-                'star',
-                'heart',
-                'ring',
-                'willow',
-                'brocade',
-                'peony',
-                'bees',
-                'pearls',
-                'strobe'
+                "circle",
+                "star",
+                "heart",
+                "ring",
+                "willow",
+                "brocade",
+                "peony",
+                "bees",
+                "pearls",
+                "strobe"
             ],
 
             sound: false
@@ -54,4 +65,14 @@ window.addEventListener("load", function() {
 
         fireworks.start();
     }
-});
+
+    // Remove listeners after first interaction
+    window.removeEventListener("click", unlockEverything);
+    window.removeEventListener("touchstart", unlockEverything);
+}
+
+/* ==================================
+   FIRST USER INTERACTION UNLOCKS ALL
+   ================================== */
+window.addEventListener("click", unlockEverything);
+window.addEventListener("touchstart", unlockEverything);
