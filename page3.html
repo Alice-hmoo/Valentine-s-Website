@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Valentine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<style>
+/* Hearts container under photo */
+.hearts-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    position: relative;
+    z-index: 2;
+    height: 100px;
+    overflow: visible;
+}
+
+.heart {
+    font-size: 2rem;
+    position: absolute;
+    bottom: 0;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.8;
+}
+
+.heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+.heart:nth-child(2) { left: 25%; animation-delay: 1s; }
+.heart:nth-child(3) { left: 40%; animation-delay: 2s; }
+.heart:nth-child(4) { left: 55%; animation-delay: 3s; }
+.heart:nth-child(5) { left: 70%; animation-delay: 4s; }
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { transform: translateY(-50px) scale(1.1); opacity: 1; }
+    100% { transform: translateY(-120px) scale(1); opacity: 0; }
+}
+
+.footer-msg {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-top: 40px;
+    z-index: 2;
+    position: relative;
+}
+
+#fireworks-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    padding-top: 50px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+</style>
+</head>
+<body>
+
+<canvas id="fireworks-canvas"></canvas>
+
+<div class="container">
+<h1>My Love ❤️</h1>
+<p class="subtitle">You are my everything, the light of my life. Every beat of my heart belongs to you. I love you more than words can say. Will you be my Valentine forever?</p>
+
+<img src="image/1.jpg" alt="Valentine photo 3">
+
+<div class="hearts-container">
+<div class="heart">❤️</div>
+<div class="heart">❤️</div>
+<div class="heart">❤️</div>
+<div class="heart">❤️</div>
+<div class="heart">❤️</div>
+</div>
+
+<p class="footer-msg">Thank you for loving me, supporting me, being beside me always. 💕</p>
+</div>
+
+<!-- Fireworks sound -->
+<audio id="fireworksSound" src="music/fireworks.mp3" loop autoplay></audio>
+
+<!-- Fireworks.js -->
+<script src="https://cdn.jsdelivr.net/npm/fireworks-js@2/dist/fireworks.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
