@@ -1,38 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Valentine</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<h1>Happy Valentine ❤️</h1>
 
-<audio id="bgMusic">
-    <source src="audio/love.mp3" loop>
-</audio>
+<p class="subtitle">
+  Click me and let love start playing 🎶💖
+</p>
 
-<div class="container">
-    <h1>Happy Valentine ❤️</h1>
-    
-   
-    <img src="image/2.jpg" alt="Valentine photo 1">
-    <!-- Floating hearts under photo -->
-    <div class="hearts-container">
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-        <div class="heart">❤️</div>
-    </div>
-    
-     <p class="subtitle">Do you love me a lot, babe?</p>
+<button onclick="startMusic()">Click Me! 💗</button>
 
-    <button onclick="location.href='page2.html'">Yes 💕</button>
+<img src="image/2.jpg">
+
+<div class="buttons-container">
+    <button onclick="goNext('page2.html')">Yes 💕</button>
     <span class="or-text">or</span>
-    <button onclick="location.href='page2.html'">Yes 💕</button>
+    <button onclick="goNext('page2.html')">Yes 💕</button>
 </div>
 
+<audio id="bgMusic" src="audio/love.mp3" loop></audio>
 <script src="script.js"></script>
-</body>
-</html>
